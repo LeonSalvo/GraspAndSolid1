@@ -24,6 +24,17 @@ namespace Full_GRASP_And_SOLID.Library
         {
             this.steps.Remove(step);
         }
+        public double GetProductionCost()
+        {
+            double resultado = 0;
+            foreach (Step step in this.steps)
+            {
+                resultado += step.Input.UnitCost + (step.Time*step.Equipment.HourlyCost);
+            }
+            return resultado;
+
+
+        }
 
         public void PrintRecipe()
         {
@@ -33,6 +44,9 @@ namespace Full_GRASP_And_SOLID.Library
                 Console.WriteLine($"{step.Quantity} de '{step.Input.Description}' " +
                     $"usando '{step.Equipment.Description}' durante {step.Time}");
             }
+            Console.WriteLine($"Costo de producción total: {GetProductionCost()}$");
         }
     }
 }
+
+/* Se utilizó el patrón expert para determinar cual era la clase adecuada para realizar el costo total. */
